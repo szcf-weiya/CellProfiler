@@ -7,7 +7,7 @@ We would love for you to be a part of the community of mostly volunteers who mai
 
 This document provides guidelines for contributing to CellProfiler. You'll find information on what you can contribute, choosing what to contribute, setting up your local workstation for development, and submitting your contribution for review and acceptance.
 
-We'd like to ensure this document is always accurate and understandable. Please [file an issue](https://github.com/CellProfiler/CellProfiler/issues/new) if any information is missing, unclear, or incorrect.  
+We'd like to ensure this document is always accurate and understandable. Please [file an issue](https://github.com/CellProfiler/CellProfiler/issues/new/choose) if any information is missing, unclear, or incorrect.  
 
 ## Creating an Issue
 
@@ -18,17 +18,17 @@ The CellProfiler team uses [GitHub issues](https://github.com/CellProfiler/CellP
 * Unexpected behavior or output
 * Feature requests (e.g., new modules)
 
-When there is an issue you would like to file, please check that the issue does not already exist. You can search open issues by including the default search filters "is: issue is: open". Once you are certain no issue exists, [create a new issue](https://github.com/CellProfiler/CellProfiler/issues/new) while keeping the following guidelines in mind:
+When there is an issue you would like to file, please check that the issue does not already exist. You can search open issues by including the default search filters "is: issue is: open". Once you are certain no issue exists, [create a new issue](https://github.com/CellProfiler/CellProfiler/issues/new/choose) while keeping the following guidelines in mind:
 
 1. Give your issue a descriptive title. A good title summarizes the issue in a single sentence. Be specific. Avoid general titles such as "Add documentation" or "Error running CellProfiler".
 
-1. Provide specific information about your issue.
+2. Provide specific information about your issue.
   * Documentation: What is the mistake? Where is the mistake? What is the correct documentation?
   * Errors: What is the exact error? How did it occur? Please provide error details from the GUI or output from the terminal.
   * Unexpected behavior: What behavior did you observe? How did it occur? What behavior do you expect?
   * Feature requests: What is the feature? Why would you like to have this functionality in CellProfiler?
 
-1. Click "Submit new issue". After an issue is created, CellProfiler maintainers will add appropriate labels to categorize your issue. The maintainers may also ask clarifying questions and engage you and the greater community in discussion of your issue. Please be ready to engage in the discussion.
+3. Click "Submit new issue". After an issue is created, CellProfiler maintainers will add appropriate labels to categorize your issue. The maintainers may also ask clarifying questions and engage you and the greater community in discussion of your issue. Please be ready to engage in the discussion.
 
 ## Choosing an Issue
 
@@ -44,7 +44,7 @@ To submit changes to CellProfiler, you'll need to have a [GitHub](https://github
 
 1. Fork CellProfiler. Click the "Fork" button near the upper right of the [CellProfiler project page](https://github.com/CellProfiler/CellProfiler) to create a copy of the CellProfiler repository in your GitHub user account.
 
-1. Create a local clone of your fork. Open your terminal and run the following commands in the directory you wish to clone your copy of the CellProfiler repository:
+2. Create a local clone of your fork. Open your terminal and run the following commands in the directory you wish to clone your copy of the CellProfiler repository:
 
   ```
   $ git clone https://github.com/YOUR-USERNAME/CellProfiler
@@ -53,13 +53,13 @@ To submit changes to CellProfiler, you'll need to have a [GitHub](https://github
 
   Substitute `YOUR-USERNAME` with your GitHub user name.
 
-1. Configure Git to sync your fork with the original CellProfiler repository. This will help you keep your copy up to date with ours. Use the command `git remote add` to add the original CellProfiler repository as a remote repository called upstream:
+3. Configure Git to sync your fork with the original CellProfiler repository. This will help you keep your copy up to date with ours. Use the command `git remote add` to add the original CellProfiler repository as a remote repository called upstream:
 
   ```
   $ git remote add upstream https://github.com/CellProfiler/CellProfiler
   ```
 
-1. Ensure your CellProfiler repository is up to date. This is the only time we suggest pushing changes to the master branch of your repository. First, ensure you have no local changes by running `git status` on the master branch:
+4. Ensure your CellProfiler repository is up to date. This is the only time we suggest pushing changes to the master branch of your repository. First, ensure you have no local changes by running `git status` on the master branch:
 
   ```
   $ git checkout master
@@ -85,7 +85,7 @@ In this section we provide a general outline of the process for submitting chang
 
 1. Find the open [issue](https://github.com/CellProfiler/CellProfiler/issues) you want to resolve. Create a [new issue](https://github.com/CellProfiler/CellProfiler/issues/new) if necessary. Check out our guidelines for creating issues before submitting a new issue.
 
-1. Create a branch using the issue number. We prefer branches which are named in the format "issues/ISSUE_NUMBER". This helps us track with issues are resolved and should be closed. Use the `git checkout` command to create a new branch and switch to it:
+2. Create a branch using the issue number. We prefer branches which are named in the format "issues/ISSUE_NUMBER". This helps us track with issues are resolved and should be closed. Use the `git checkout` command to create a new branch and switch to it:
 
   ```
   $ git checkout -b issues/ISSUE_NUMBER
@@ -93,7 +93,7 @@ In this section we provide a general outline of the process for submitting chang
 
   Substitute `ISSUE_NUMBER` with the number of the issue you are going to resolve with your change. Each issue has a unique issue number which is displayed next to the issue title. An example might be, "Document which modules respect masks #2245". The issue number is 2245. You would create a branch named issues/2245.
 
-1. Make changes on your branch. Use the `git add` command to add modified files and the `git commit` command to commit your changes:
+3. Make changes on your branch. Use the `git add` command to add modified files and the `git commit` command to commit your changes:
 
   ```
   $ git add -u .
@@ -112,7 +112,7 @@ In this section we provide a general outline of the process for submitting chang
 
   You can add as many commits to your branch as necessary. We suggest each commit records a change with a single purpose. You should be able to describe a commit without using the word "and".
 
-1. Push your local changes to your GitHub repository. Use the `git push` command to update your repository with your local changes:
+4. Push your local changes to your GitHub repository. Use the `git push` command to update your repository with your local changes:
 
   ```
   $ git push origin issues/ISSUE_NUMBER
@@ -120,7 +120,7 @@ In this section we provide a general outline of the process for submitting chang
 
   This step is required before you can make a pull request. Additionally, we recommend doing this often so you won't lose your work if you lose access to your workstation.
 
-1. Create a pull request when you're ready to have your changes reviewed. Find your branch on your GitHub project page by navigating to:
+5. Create a pull request when you're ready to have your changes reviewed. Find your branch on your GitHub project page by navigating to:
 
   ```
   https://github.com/YOUR-USERNAME/CellProfiler/branches
@@ -134,9 +134,9 @@ In this section we provide a general outline of the process for submitting chang
 
   When you are ready, click "Create pull request".
 
-1. Respond to feedback from maintainers. After a pull request is submitted it will be reviewed by CellProfiler maintainers. Be prepared to make revisions to your pull request before it is accepted.
+6. Respond to feedback from maintainers. After a pull request is submitted it will be reviewed by CellProfiler maintainers. Be prepared to make revisions to your pull request before it is accepted.
 
-1. Update your repository with your accepted change. Once accepted, your change is in the CellProfiler project's master branch. You can update your master branch by running the following commands:
+7. Update your repository with your accepted change. Once accepted, your change is in the CellProfiler project's master branch. You can update your master branch by running the following commands:
 
   ```
   $ git checkout master
@@ -176,7 +176,7 @@ Releasing a new version of CellProfiler requires two steps:
 
 1. Update the version numbers in `cellprofiler/__init__.py` and `docs/source/conf.py` to reflect the new version
 
-1. Release the version on GitHub 
+2. Release the version on GitHub 
    (for more information see [here](https://help.github.com/articles/creating-releases/), GitHub will automatically attached the compressed source code)
 
 Once the repository is tagged with the new version, a new version will need to be built. See below for more details.
