@@ -263,6 +263,7 @@ R_PARENT = "Parent"
 
 F_PREFIX = "TrackObjects"
 F_LABEL = "Label"
+F_NEW_OBJECT_NUMBER = "NewObjectNumber"
 F_PARENT_OBJECT_NUMBER = "ParentObjectNumber"
 F_PARENT_IMAGE_NUMBER = "ParentImageNumber"
 F_TRAJECTORY_X = "TrajectoryX"
@@ -1504,13 +1505,14 @@ Enter a name to give the color-coded image of tracked labels.""",
                 kalman_states = []
             if self.velocity_model:
                 kalman_states.append(centrosome.filter.velocity_kalman_model())
-        areas = fixup_scipy_ndimage_result(
-            scipy.ndimage.sum(
-                np.ones(objects.segmented.shape),
-                objects.segmented,
-                np.arange(1, np.max(objects.segmented) + 1, dtype=np.int32),
-            )
-        )
+        # areas = fixup_scipy_ndimage_result(
+        #     scipy.ndimage.sum(
+        #         np.ones(objects.segmented.shape),
+        #         objects.segmented,
+        #         np.arange(1, np.max(objects.segmented) + 1, dtype=np.int32),
+        #     )
+        # )
+        areas = np.ones(objects.segmented.shape[0]) # all 1
         areas = areas.astype(int)
         model_types = np.array(
             [
@@ -1525,7 +1527,8 @@ Enter a name to give the color-coded image of tracked labels.""",
         )
 
         if n_old > 0:
-            new_i, new_j = centers_of_labels(objects.segmented)
+            # new_i, new_j = centers_of_labels(objects.segmented)
+            new_i, new_j = objects.segmented[:, 0], objects.segmented[:, 1]
             n_new = len(new_i)
             i, j = np.mgrid[0:n_old, 0:n_new]
             ##############################
@@ -1549,7 +1552,7 @@ Enter a name to give the color-coded image of tracked labels.""",
                     np.minimum(noise_sd * self.radius_std.value, self.radius_limit.max),
                     self.radius_limit.min,
                 )
-
+                
                 is_best = (dk < d) & (dk < radius[:, np.newaxis])
                 d[is_best] = dk[is_best]
                 minDist[is_best] = radius[i][is_best]
@@ -1659,12 +1662,16 @@ Enter a name to give the color-coded image of tracked labels.""",
                     kalman_state, old_idx, np.column_stack((new_i, new_j)), q, r
                 )
                 new_kalman_states.append(new_kalman_state)
+            print("num. of kalman states", len(new_kalman_states))
             self.set_kalman_states(workspace, new_kalman_states)
 
-            i, j = (centers_of_labels(objects.segmented) + 0.5).astype(int)
+            # i, j = (centers_of_labels(objects.segmented) + 0.5).astype(int)
+            i, j = objects.segmented[:, 0], objects.segmented[:, 1]
+            self.add_measurement(workspace, F_NEW_OBJECT_NUMBER, new_object_numbers)
             self.map_objects(workspace, new_object_numbers, old_object_numbers, i, j)
         else:
-            i, j = centers_of_labels(objects.segmented)
+            # i, j = centers_of_labels(objects.segmented)
+            i, j = objects.segmented[:, 0], objects.segmented[:, 1]
             count = len(i)
             link_type = np.ones(count, int) * LT_NONE
             model_type = np.ones(count, int) * KM_NONE

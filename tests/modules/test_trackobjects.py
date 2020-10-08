@@ -360,14 +360,14 @@ def test_track_one_moving():
         labels = numpy.zeros((10, 10), int)
         labels[4 + i_off : 7 + i_off, 4 + j_off : 7 + j_off] = 1
         labels_list.append(labels)
-
+    
     def fn(module, workspace, idx):
         if idx == 0:
             module.pixel_radius.value = 3
             module.tracking_method.value = "Distance"
 
     measurements = runTrackObjects(labels_list, fn)
-
+    print(measurements)
     def m(feature, expected):
         name = "_".join((cellprofiler.modules.trackobjects.F_PREFIX, feature, "3"))
         value_set = measurements.get_all_measurements(OBJECT_NAME, name)
@@ -660,6 +660,19 @@ def test_ambiguous():
     assert m(cellprofiler.modules.trackobjects.F_PARENT_OBJECT_NUMBER) == 2
 
 
+def test_LAP1():
+    def fn(module, workspace, idx):
+        print(module.radius_limit.max, " ", module.radius_limit.min)
+        module.radius_limit.max = 10
+        module.radius_limit.min = 1
+        print(module.radius_limit.max, " ", module.radius_limit.min)
+        if idx == 0:
+            module.tracking_method.value = "LAP"
+    measurements = runTrackObjects([numpy.array([[10, 10],[100, 100]]),
+                                    numpy.array([[101, 101],[8, 8]]),
+                                    numpy.array([[102, 102],[8, 6]])], fn)
+    return measurements    
+
 def test_cross_numbered_objects():
     """Test labeling when object 1 in one image becomes object 2 in next"""
 
@@ -672,7 +685,6 @@ def test_cross_numbered_objects():
             module.tracking_method.value = "LAP"
 
     measurements = runTrackObjects([numpy.array(p)[labels] for p in pp], fn)
-
     def m(feature, i):
         name = "_".join((cellprofiler.modules.trackobjects.F_PREFIX, feature))
         values = measurements[OBJECT_NAME, name, i + 1]
